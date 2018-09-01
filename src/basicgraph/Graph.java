@@ -121,8 +121,13 @@ public abstract class Graph {
 	 * @return The degree sequence of this graph.
 	 */
 	public List<Integer> degreeSequence() {
-		// XXX: Implement in part 1 of week 2
-		return null;
+		//Implement in part 1 of week 2
+		List<Integer> sortedDegrees = new ArrayList<>();
+		for(int v = 0; v < numVertices; v ++){
+			sortedDegrees.add(getNeighbors(v).size() + getInNeighbors(v).size());
+		}
+		Collections.sort(sortedDegrees, Collections.reverseOrder());
+		return sortedDegrees;
 	}
 	
 	/**
@@ -263,7 +268,13 @@ public abstract class Graph {
 		System.out.println("Testing distance-two methods on sample graphs...");
 		System.out.println("Goal: implement method using two approaches.");
 
-
+		GraphAdjMatrix graphFromFile2 = new GraphAdjMatrix();
+		GraphLoader.loadRoadMap("data/testdata/simpletest.map", graphFromFile2);
+		for(int v = 0; v < graphFromFile.getNumVertices(); v++){
+			System.out.println(v + "=" + graphFromFile.getDistance2(v));
+			System.out.println(v + "=" + graphFromFile2.getDistance2(v));
+			System.out.println("\n");
+		}
 		
 	}
 }

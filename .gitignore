@@ -2,3 +2,6 @@
 .settings/
 UCSDGraphs.iml
 LICENSE
+.DS_Store
+bin/
+src/.DS_Store

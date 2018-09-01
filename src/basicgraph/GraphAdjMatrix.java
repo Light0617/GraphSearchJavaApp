@@ -105,7 +105,29 @@ public class GraphAdjMatrix extends Graph {
 	 */	
 	public List<Integer> getDistance2(int v) {
 		// XXX Implement this method in week 2
-		return null;
+		List<Integer> hop2Nodes = new ArrayList<>();
+		for(int node = 0; node < getNumVertices(); node++){
+			int count = multiply(v, node);
+			for(int i = 0; i < count; i++){
+				hop2Nodes.add(node);
+			}
+		}
+		return hop2Nodes;
+	}
+
+	/**
+	 * Implement the dot product of ith row and jth to get
+	 * to get the number of from node i to node j with 2 hops
+	 *
+	 * @param i, j, the ith row and jth col.
+	 * @return int the dot product of ith row and jth col in adjMatrix.
+	 */
+	private int multiply(int i, int j){
+		int count = 0;
+		for(int k = 0; k < getNumVertices(); k++){
+			count += adjMatrix[i][k] * adjMatrix[k][j];
+		}
+		return count;
 	}
 	
 	/**
