@@ -3,8 +3,10 @@
  */
 package roadgraph;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.Map;
 
 import geography.GeographicPoint;
 
@@ -22,6 +24,9 @@ class MapNode
     /** the latitude and longitude of this node */
     private GeographicPoint location;
 
+    /** the latitude and longitude of this node */
+    private Map<MapNode, Double> distanceMap;
+
     /**
      * Create a new MapNode at a given Geographic location
      * @param loc the location of this node
@@ -30,6 +35,7 @@ class MapNode
     {
         location = loc;
         edges = new HashSet<MapEdge>();
+        distanceMap = new HashMap<>();
     }
 
     /**
@@ -39,6 +45,32 @@ class MapNode
     void addEdge(MapEdge edge)
     {
         edges.add(edge);
+        distanceMap.put(edge.getOtherNode(this), edge.getLength());
+    }
+
+
+    /**
+     * get the edge distance between the node
+     * @param node The node to be compute
+     * @return double The edge distance between the node
+     */
+    public double getEdgeDistanceTo(MapNode node) {
+        if(!distanceMap.containsKey(node)){
+            return Double.MAX_VALUE;
+        } else{
+            return distanceMap.get(node);
+        }
+    }
+
+    /**
+     * get the straight distance between the node
+     * @param node The node to be compute
+     * @return double The straight distance between the node
+     */
+    public double getDistanceTo(MapNode node) {
+        double diffX = location.x - node.getLocation().x;
+        double diffY = location.y - node.getLocation().y;
+        return Math.sqrt(diffX * diffX + diffY * diffY);
     }
 
     /**
