@@ -1,4 +1,4 @@
-# graph_java_app
+# GraphSearchJavaApp
 
 ## How to use
 - open Intellij and run `application.MapApp`
